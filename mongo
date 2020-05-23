@@ -1,0 +1,30 @@
+$ mongo
+use shop
+switched to db shop
+db.createcollection('catalogs')
+db.createcollection('products')
+db.catalogs.insert({name: Процессоры})
+db.catalogs.insert({name: Мат.платы})
+db.catalogs.insert({name: Видеокарты})
+
+db.catalogs.find()
+
+db.products.insert({
+	name: 'Intel Core',
+	descripton: 'Процессор для пк',
+	price: 7890.00,
+	catalog_id = 1
+});
+writeresult ({"nInserted" : 1})
+db.products.find()
+
+db.products.insert({
+	name: 'Asus ROG MAXIMUS',
+	descripton: 'Материнская плата Asus'
+	catalog_id = 2
+});
+writeresult ({"nInserted" : 1})
+db.products.find()
+
+db.products.find({catalog_id = 1})
+

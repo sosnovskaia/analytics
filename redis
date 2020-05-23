@@ -1,0 +1,30 @@
+$ redis-cli
+$ redis-benchmark -n 100000
+help @
+
+set '127.0.0.1' 12
+get '127.0.0.1' "12"
+incr '127.0.0.1' (integer) 13
+
+hincrby addresses '127.0.0.1' 1 (integer) 1
+hgetall addresses 
+hincrby addresses '127.0.0.1' 1 (integer) 2
+hget addresses '127.0.0.1'
+
+hset emails 'katya' 'katya@ya.ru' (integer) 0
+hset emails 'sasha' 'sasha@ya.ru' (integer) 0
+hset emails 'tanya' 'tanya@ya.ru' (integer) 0
+hset emails 'vitya' 'vitya@ya.ru' (integer) 0
+hset emails 'nastya' 'nastya@ya.ru' (integer) 0
+
+hgetall emails
+hget emails 'katya'
+
+hset users 'katya@ya.ru' 'katya' (integer) 0
+hset users 'sasha@ya.ru' 'sasha' (integer) 0
+hset users 'tanya@ya.ru' 'tanya' (integer) 0
+hset users 'vitya@ya.ru' 'vitya' (integer) 0
+hset users 'nastya@ya.ru' 'nastya' (integer) 0
+
+hgetall users
+hget emails 'vitya@ya.ru'
