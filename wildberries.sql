@@ -22,7 +22,8 @@ DROP TABLE IF EXISTS `delivery`;
 CREATE TABLE `delivery` (
 	id SERIAL PRIMARY KEY,
 	`type` enum ('доставка в пункт самовывоза', 'доставка курьером', 'доставка почтой'),
-	`pickup point` varchar(100),
+	`pickup_point` enum ('пункт 1', 'пункт 2', 'пункт 3', 'пункт 4', 'пункт 5', 'адрес покупателя'),
+	`address` varchar (100),
 	`price` BIGINT unsigned NOT NULL,
 	`date` date,
 	`status` ENUM ('доставлен', 'сборка заказа', 'заказ готов к доставке', 'в пути', 'отменен'),
@@ -47,7 +48,7 @@ DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
 	id SERIAL PRIMARY KEY,
 	`brand_name` varchar(100),
-	`description` text,
+	`description` varchar(255),
 	`logo` BIGINT UNSIGNED not NULL,
 	INDEX brand_name_idx(brand_name)
 	);
@@ -58,7 +59,7 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
 	id SERIAL PRIMARY KEY,
     `category_name` VARCHAR(50),
-	`description` TEXT,
+	`description` varchar (255),
 	INDEX category_idx(category_name)
 );
 
@@ -84,8 +85,8 @@ CREATE TABLE `profiles` (
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
 	id SERIAL PRIMARY KEY,
-	`product_name` VARCHAR(255),
-	`description` TEXT,
+	`product_name` VARCHAR(100),
+	`description` VARCHAR(255),
 	`category_id` BIGINT unsigned not NULL,
 	`created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	`updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -102,7 +103,7 @@ CREATE TABLE `catalog` (
 	`product_id` BIGINT unsigned NOT null,
 	`brand_id` BIGINT unsigned NOT null,
 	`photo` BIGINT unsigned NOT NULL,
-	`description` TEXT,
+	`description` varchar (255),
 	FOREIGN KEY (category_id) REFERENCES `category`(id),
 	FOREIGN KEY (product_id) REFERENCES `products`(id),
 	FOREIGN KEY (brand_id) REFERENCES `brands`(id)
@@ -139,7 +140,7 @@ DROP TABLE IF EXISTS `rewiews`;
 CREATE TABLE `rewiews` (
 	id SERIAL PRIMARY KEY,
 	`users_id` BIGINT UNSIGNED not NULL,
-	`rewiew` text,
+	`rewiew` varchar (255),
 	`product_id` BIGINT UNSIGNED not NULL,
 	`rewiew_photo` BIGINT UNSIGNED not NULL,
 	`mark` enum ('1', '2', '3', '4', '5'),
@@ -152,8 +153,8 @@ CREATE TABLE `rewiews` (
 DROP TABLE IF EXISTS `promotions`;
 CREATE TABLE `promotions` (
 	id SERIAL PRIMARY KEY,
-	`promotion_name` VARCHAR(30),
-	`description` text,
+	`promotion_name` VARCHAR(100),
+	`description` VARCHAR(255),
 	`photo` BIGINT UNSIGNED not NULL,
 	`brands_id` BIGINT UNSIGNED not NULL,
 	`category_id` BIGINT UNSIGNED not NULL,
@@ -196,9 +197,9 @@ CREATE TABLE `requests` (
 id SERIAL PRIMARY KEY,
 	`user_id` BIGINT unsigned NOT NULL,
 	`reasons` ENUM ('возврат товара', 'оплата', 'доставка', 'учетная запись', 'другое'),
-	`request` text,
+	`request` varchar(255),
 	`requesr_created_at` DATETIME DEFAULT NOW(),
-	`answer` text,
+	`answer` VARCHAR(100),
 	`answer_created_at` DATETIME DEFAULT NOW(),
 	`operator_name` varchar(100),
 	FOREIGN KEY (`user_id`) REFERENCES users(id)
