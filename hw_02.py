@@ -69,9 +69,9 @@ for index, value in enumerate(separate_str, 1):
 # то новый элемент с тем же значением должен разместиться после них.
 
 
-s = [7, 6, 5, 4, 3, 2]
+s = [3, 7, 1, 8, 6, 2, 4]
 
-tryCount = 5
+tryCount = 6
 #
 i = 0
 while i < tryCount:
