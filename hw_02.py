@@ -3,7 +3,7 @@
 # Использовать функцию type() для проверки типа.
 # Элементы списка можно не запрашивать у пользователя, а указать явно, в программе.
 
-total_list = [1, 'name', false, 36.6, None]
+total_list = [1, 'name', 36.6, None]
 
 for item in total_list:
     print(type(item))
